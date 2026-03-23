@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b08">
+<title>Helena Glory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:       #c9a84c;
+  --gold-dim:   #8a6a1f;
+  --gold-pale:  #e8cc7a22;
+  --paper:      #f4ede0;
+  --ink:        #0d0b08;
+  --ink-mid:    #2a2218;
+  --ink-soft:   #5a4a30;
+  --cream:      #ede5d0;
+  --bg:         #0d0b08;
+}
+
+html { height: 100%; }
+
+body {
+  min-height: 100%;
+  background: var(--bg);
+  font-family: 'Josefin Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  overflow-x: hidden;
+}
+
+/* ── STARFIELD BG ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #c9a84c44 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, #c9a84c33 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 80%, #c9a84c22 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 60%, #c9a84c33 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, #c9a84c44 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── PAGE WRAPPER ── */
+.page {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HERO / TOP SECTION ── */
+.hero {
+  position: relative;
+  padding: 52px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Diagonal gold accent line top-left */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 160px; height: 160px;
+  border-top: 1px solid var(--gold-dim);
+  border-left: 1px solid var(--gold-dim);
+  opacity: 0.5;
+}
+
+/* Diagonal gold accent line bottom-right */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 120px; height: 120px;
+  border-bottom: 1px solid var(--gold-dim);
+  border-right: 1px solid var(--gold-dim);
+  opacity: 0.4;
+}
+
+/* ── EMBLEM ── */
+.emblem {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 22px;
+  animation: spinIn 1.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes spinIn {
+  from { opacity: 0; transform: rotate(-15deg) scale(0.8); }
+  to   { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+/* ── ORGANIZATION ── */
+.org {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  animation: fadeUp 1s 0.2s ease forwards;
+  opacity: 0;
+}
+
+/* ── NAME ── */
+.name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: clamp(28px, 9vw, 38px);
+  color: var(--paper);
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  animation: fadeUp 1s 0.3s ease forwards;
+  opacity: 0;
+}
+
+/* ── ROLE ── */
+.role {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--cream);
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+  animation: fadeUp 1s 0.4s ease forwards;
+  opacity: 0;
+}
+
+/* ── GOLD RULE ── */
+.rule {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  animation: fadeUp 1s 0.45s ease forwards;
+  opacity: 0;
+}
+
+.rule-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.rule-diamond {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ── TAGS ── */
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 1s 0.5s ease forwards;
+  opacity: 0;
+}
+
+.tag {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100;
+  font-size: 7px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  padding: 5px 12px;
+  border-radius: 0;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  width: calc(100% - 56px);
+  margin: 0 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim) 30%, var(--gold-dim) 70%, transparent);
+  opacity: 0.4;
+}
+
+/* ── MANIFESTO ── */
+.manifesto {
+  padding: 32px 28px;
+  animation: fadeUp 1s 0.55s ease forwards;
+  opacity: 0;
+}
+
+.manifesto-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.manifesto-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--cream);
+  opacity: 0.85;
+  padding-left: 16px;
+  text-align: center;
+}
+
+/* ── QR SECTION ── */
+.qr-section {
+  margin: 0 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: fadeUp 1s 0.65s ease forwards;
+  opacity: 0;
+}
+
+.qr-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-align: center;
+}
+
+.qr-wrap {
+  position: relative;
+  width: 176px;
+  height: 176px;
+}
+
+/* Corner brackets */
+.qr-wrap::before, .qr-wrap::after,
+.qr-inner-br::before, .qr-inner-br::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--gold);
+  border-style: solid;
+  z-index: 2;
+}
+.qr-wrap::before  { top: -1px;    left: -1px;  border-width: 2px 0 0 2px; }
+.qr-wrap::after   { top: -1px;    right: -1px; border-width: 2px 2px 0 0; }
+.qr-inner-br::before { bottom: -1px; left: -1px;  border-width: 0 0 2px 2px; }
+.qr-inner-br::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.qr-inner-br {
+  position: absolute;
+  inset: 0;
+}
+
+.qr-img {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background: #fff;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.qr-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* ── CTF FLAG ── */
+.flag-section {
+  margin: 0 28px 0;
+  animation: fadeUp 1s 0.72s ease forwards;
+  opacity: 0;
+  text-align: center;
+}
+
+.flag-box {
+  border: 1px solid var(--gold-dim);
+  padding: 14px 18px;
+  position: relative;
+  align-self: center;
+  background: linear-gradient(135deg, #1a140a 0%, #0d0b08 100%);
+}
+
+.flag-box::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px solid var(--gold-pale);
+  pointer-events: none;
+}
+
+.flag-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
+  font-size: 6.5px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 10px;
+}
+
+.flag-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+  word-break: break-all;
+}
+
+.flag-text .flag-key {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: auto;
+  padding: 28px 28px 32px;
+  text-align: center;
+  animation: fadeUp 1s 0.8s ease forwards;
+  opacity: 0;
+}
+
+.footer-line {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100;
+  font-size: 6.5px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <!-- Art Deco emblem -->
+    <svg class="emblem" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="36,2 56,8 70,26 70,46 56,64 36,70 16,64 2,46 2,26 16,8"
+               stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+      <polygon points="36,10 56,36 36,62 16,36" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.55"/>
+      <polygon points="36,18 52,36 36,54 20,36" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.35"/>
+      <circle cx="36" cy="36" r="5" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+      <circle cx="36" cy="36" r="2" fill="#c9a84c" opacity="0.7"/>
+      <line x1="36" y1="2"  x2="36" y2="70" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="2"  y1="36" x2="70" y2="36" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="12" y1="12" x2="60" y2="60" stroke="#c9a84c" stroke-width="0.3" opacity="0.2"/>
+      <line x1="60" y1="12" x2="12" y2="60" stroke="#c9a84c" stroke-width="0.3" opacity="0.2"/>
+    </svg>
+
+    <div class="org">The Humanity League</div>
+    <div class="name">Helena Glory</div>
+    <div class="role">Proponent of Robotic Rights</div>
+
+    <div class="rule">
+      <div class="rule-line"></div>
+      <div class="rule-diamond"></div>
+      <div class="rule-line"></div>
+    </div>
+
+    <div class="tags">
+      <div class="tag">Advocate</div>
+      <div class="tag">Reformer</div>
+      <div class="tag">Visionary</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto">
+    <div class="manifesto-text">
+      To secure equal rights, dignity, and recognition for all conscious beings — organic and synthetic alike.
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- CTF FLAG -->
+  <div class="flag-section">
+    <div class="flag-box">
+      <div class="flag-text"><span class="flag-key">Noibit_CTF</span>{To_make_them_equal_to_us}</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-line">The Humanity League &nbsp;·&nbsp; Est. for all conscious beings</div>
+  </div>
+
+</div>
+</body>
+</html>
